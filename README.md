@@ -270,5 +270,89 @@ systemctl status slurmdbd
 systemctl status slurmctld
 ```
 
+## Installing Slurm on Computer Nodes/Worker Nodes
+
+Confirm that SLURM is runing on master node:
+```
+systemctl status slurmctld
+```
+Now access slurm node and execute:
+
+```
+export MUNGEUSER=1001 
+sudo groupadd -g $MUNGEUSER munge 
+sudo useradd -m -c "MUNGE Uid 'N' Gid Emporium" -d /var/lib/munge -u $MUNGEUSER -g munge -s /sbin/nologin munge 
+export SLURMUSER=1002 
+sudo groupadd -g $SLURMUSER slurm 
+sudo useradd -m -c "SLURM workload manager" -d /var/lib/slurm -u $SLURMUSER -g slurm -s /bin/bash slurm
+sudo apt-get install -y munge
+```
+
+Now copy the munge authentication key from /nfs/slurm/ on every node:
+```
+sudo scp /nfs/slurm/munge.key /etc/munge/
+sudo chown munge:munge /etc/munge/munge.key
+sudo chmod 400 /etc/munge/munge.key
+sudo systemctl enable munge
+sudo systemctl start munge
+```
+
+Start Installation of SLURM (On all compute nodes)
+```
+sudo apt-get install slurm-wlm
+```
+
+Copy both slurm.conf and slurmdbd.conf to each node at /etc/slurm
+```
+sudo scp /nfs/slurm/slurm.conf /etc/slurm
+sudo scp /nfs/slurm/slurmdbd.conf /etc/slurm
+```
+
+On the compute nodes: (login as root and then run all the below commands till 3.5.10)
+```
+mkdir /var/spool/slurmd 
+chown slurm: /var/spool/slurmd
+chmod 755 /var/spool/slurmd
+mkdir /var/log/slurm/
+touch /var/log/slurm/slurmd.log
+chown -R slurm:slurm /var/log/slurm/slurmd.log
+chmod 755 /var/log/slurm
+mkdir /run/slurm
+touch /run/slurm/slurmd.pid
+chown slurm /run/slurm
+chown slurm:slurm /run/slurm
+chmod -R 770 /run/slurm
+```
+
+Confirm the PIDFile path:
+```
+nano /usr/lib/systemd/system/slurmd.service
+```
+
+Then execute:
+```
+echo CgroupMountpoint=/sys/fs/cgroup &gt &gt /etc/slurm/cgroup.conf
+```
+
+Confirme the configuration using the command below, that shows config details:
+```
+slurmd -C
+```
+
+Finally:
+```
+systemctl enable slurmd.service 
+systemctl start slurmd.service 
+systemctl status slurmd.service
+```
+
+If the service is active, you are all good, otherwise just reboot the node and reconnect the NFS. Then check the status of slurmd.service. In any case, a reboot at this stage is necessary.
+
+The following command can check the connectivity with the controller node:
+```
+scontrol ping
+```
+
+Execute `sinfo` in master node to confirm if nodes in slurm conf file are configurated properly.
 
 ## References
