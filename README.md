@@ -8,19 +8,19 @@ Install a default mode Ubuntu
 
 Open a terminal and execute on login node (master or head):
 
-´´´
+```
 sudo apt update
 sudo apt install openssh-server
 sudo systemctl status ssh
 sudo ufw allow ssh
-´´´
+```
 
 ### SSH Server, Hostnames, Passwordless Login among Nodes
 
 Then create a Key:
-´´´
+```
 ssh-keygen -t rsa
-´´´
+```
 
 And them copy it to the nodes (compute or worker) using the following, from the master one:
 ```
@@ -94,27 +94,27 @@ Confirm that NFS share is working properly creating a file using master and foun
 Conect to the login node: 
 
 ```
-$ export MUNGEUSER=1001
+export MUNGEUSER=1001
 ```
 
 ```
-$ sudo groupadd -g $MUNGEUSER munge
+sudo groupadd -g $MUNGEUSER munge
 ```
 
 ```
-$ sudo useradd -m -c "MUNGE Uid 'N' Gid Emporium" -d /var/lib/munge -u $MUNGEUSER -g munge -s /sbin/nologin munge
+sudo useradd -m -c "MUNGE Uid 'N' Gid Emporium" -d /var/lib/munge -u $MUNGEUSER -g munge -s /sbin/nologin munge
 ```
 
 ```
-$ export SLURMUSER=1002
+export SLURMUSER=1002
 ```
 
 ```
-$ sudo groupadd -g $SLURMUSER slurm
+sudo groupadd -g $SLURMUSER slurm
 ```
 
 ```
-$ sudo useradd -m -c "SLURM workload manager" -d /var/lib/slurm -u $SLURMUSER -g slurm -s /bin/bash slurm
+sudo useradd -m -c "SLURM workload manager" -d /var/lib/slurm -u $SLURMUSER -g slurm -s /bin/bash slurm
 ```
 
 ```
@@ -207,8 +207,6 @@ Now lets ccreate the configuration file /etc/slurm/slurm.conf by visiting the we
 ```
 sudo nano /etc/slurm-llnl/slurm.conf
 ```
-
-
 
 Allow the ports in firewall:
 ```
@@ -354,5 +352,6 @@ scontrol ping
 ```
 
 Execute `sinfo` in master node to confirm if nodes in slurm conf file are configurated properly.
+
 
 ## References
