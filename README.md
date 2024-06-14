@@ -1,6 +1,6 @@
 # AI-HPC-Install-Config
 
-This guide provides a comprehensive walkthrough for setting up a High-Performance Computing (HPC) cluster using Ubuntu. It includes steps to configure a master node, set up passwordless SSH, install and configure NFS for shared storage, and install Slurm for job scheduling and workload management.
+This guide provides a comprehensive walkthrough for setting up a High-Performance Computing (HPC) cluster using Ubuntu. It includes steps to configure a master node, set up passwordless SSH, install and configure NFS for shared storage, and install Slurm (24.05) for job scheduling and workload management.
 
 ## Index
 
