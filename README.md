@@ -1,5 +1,22 @@
 # AI-HPC-Install-Config
 
+This guide provides a comprehensive walkthrough for setting up a High-Performance Computing (HPC) cluster using Ubuntu. It includes steps to configure a master node, set up passwordless SSH, install and configure NFS for shared storage, and install Slurm for job scheduling and workload management.
+
+## Index
+
+1. [Summary Overview](#summary-overview)
+2. [How to Make a Cluster Computer](#how-to-make-a-cluster-computer)
+    - [Install Ubuntu](#install-ubuntu)
+    - [Setting Up the Master Node](#setting-up-the-master-node)
+3. [Installing and Configuring NFS for Cluster Computer](#installing-and-configuring-nfs-for-cluster-computer)
+    - [On the Master Node (Login or Head)](#on-the-master-node-login-or-head)
+    - [On the Compute Nodes (Worker)](#on-the-compute-nodes-worker)
+4. [Installing Slurm on Login Node/Head Node](#installing-slurm-on-login-nodehead-node)
+    - [Create MUNGE and SLURM Users](#create-munge-and-slurm-users)
+    - [Set Up MariaDB and Slurm](#set-up-mariadb-and-slurm)
+    - [Configure and Start Slurm Services](#configure-and-start-slurm-services)
+5. [Installing Slurm on Compute Nodes (Worker Nodes)](#installing-slurm-on-compute-nodes-worker-nodes)
+
 ## How to Make a Cluster Computer
 
 ### Install Ubuntu
