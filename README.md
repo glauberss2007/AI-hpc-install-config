@@ -179,7 +179,7 @@ Install Ubuntu in default mode on all nodes.
     StorageLoc=slurm_acct_db
     StoragePass=hashmi12
     StorageUser=slurm
-    PurgeEventAfter=12months
+    PurgeEventAfter=12monthshttps://www.youtube.com/playlist?list=PLWk-zl-RHnbc8PS55ZiJHFtPTQobegyH5
     PurgeJobAfter=12months
     PurgeResvAfter=2months
     PurgeStepAfter=2months
@@ -352,3 +352,4 @@ Install Ubuntu in default mode on all nodes.
 
 - [Slurm Documentation](https://slurm.schedmd.com/documentation.html)
 - [Ubuntu Server Guide](https://ubuntu.com/server/docs)
+- [Video step-by-step](https://www.youtube.com/playlist?list=PLWk-zl-RHnbc8PS55ZiJHFtPTQobegyH5)
